@@ -1,11 +1,13 @@
 #!/bin/bash
 
 space='lh rh mni305'
-contrast='csmpr001 csmpr002 csmpr003 csmpr004 csppr001 csppr002 csppr003 csppr004 cspspr001 cspspr002 cspspr003 cspspr004 csp_v_csmpr001 csp_v_csmpr002 csp_v_csmpr003 csp_v_csmpr004'
+contrast='csm csp csp_v_csm csps'
+run='pr001 pr002 pr003 pr004'
+for r in ${run[@]}; do
 for c in ${contrast[@]}; do
 for s in ${space[@]}; do
 	
-	d=/group/tuominen/EmoSal/group/fc.${s}/${c}
+	d=/group/tuominen/EmoSal/group/fc.${s}/${c}/${r}
 
 	if [ $s != 'mni305' ]; then
 		conditional="--surface fsaverage  ${s}"
@@ -22,3 +24,4 @@ for s in ${space[@]}; do
 
 done
 done 
+done
