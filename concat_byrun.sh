@@ -20,12 +20,17 @@ path2data=/group/tuominen/EmoSal/subjects/
 output=/group/tuominen/EmoSal/group/
 # for all subjects specified in sessidlist.txt, concatenates cespct and cesvarpct files
 for s in ${space[@]}; do
+	
+	#mkdir ${output}/${s}
+
+	for c in ${contrast[@]}; do 
+		
+		#mkdir ${output}/${s}/${c}
 
 	for r in ${runs[@]}; do
 
-		for c in ${contrast[@]}; do 
+			mkdir ${output}/${s}/${c}/${r}
 
-	
 			pces=bold/${s}/${r}/${c}/cespct.nii.gz
 			pcesvar=bold/${s}/${r}/${c}/cesvarpct.nii.gz
 
@@ -34,7 +39,7 @@ for s in ${space[@]}; do
 					cmd+=" --i $path2data/${subj}/$pces"			
 			done
 			
-			cmd+=" --o ${output}/${s}/${c}${r}/cespct.nii.gz"
+			cmd+=" --o ${output}/${s}/${c}/${r}/cespct.nii.gz"
 			$cmd
 			cmd='mri_concat'
 			
@@ -42,7 +47,7 @@ for s in ${space[@]}; do
 					cmd+=" --i $path2data/${subj}/$pcesvar"
 			done
 			
-			cmd+=" --o ${output}/${s}/${c}${r}/cesvarpct.nii.gz"
+			cmd+=" --o ${output}/${s}/${c}/${r}/cesvarpct.nii.gz"
 			$cmd
 		done 
 	done 
