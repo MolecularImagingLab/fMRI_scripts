@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
 
 #! /home/lauri/anaconda3/bin/python
 # Load libraries
@@ -17,10 +13,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import colors
 from matplotlib import cm
-
-
-# In[1]:
-
 
 def pauli_atlas(views):
 # Creates subcortical parcellation maps based on Pauli 2018
@@ -48,10 +40,6 @@ def pauli_atlas(views):
                 plotting.plot_prob_atlas(atlas, cut_coords=cut_coords, view_type='continuous', display_mode=v,black_bg=True, colorbar = True)
                 plt.savefig(date_stamp,dpi=600)
 
-
-# In[8]:
-
-
 def choi_cmaps():
 # Creating custom colour palette based on Choi 2012
 # Colours in order: Purple, Blue, Green, Violet, Cream, Orange, Red
@@ -78,10 +66,6 @@ def choi_cmaps():
         cm.register_cmap(name=k, cmap=v)
 # To confirm cmap is registered view list of colormaps using matplotlib.pyplot.colormaps
 
-
-# In[22]:
-
-
 def choi_atlas(views):
 # Creates subcortical parcellation maps based on Choi 2012
 # Definiition of datestamp as the current date 
@@ -103,10 +87,6 @@ def choi_atlas(views):
             cut_coords=(-32,-28,-24,-20,-16,-12,-8)
             choi_parc = plotting.plot_roi(striatal_parc, cut_coords=cut_coords, colorbar = True, cmap = plt.cm.get_cmap('choi_lut',7), display_mode=v,black_bg=True)
             plt.savefig(date_stamp,dpi=600)
-
-
-# In[21]:
-
 
 def stat_maps(views):
 # Creates statistical maps of subcortical structures in saggital, coronal and axial views
@@ -140,10 +120,6 @@ def stat_maps(views):
                 stat_map = plotting.plot_stat_map(os.path.join(path,f), threshold = 1.3, vmax = 5, cut_coords=cut_coords, display_mode=v,black_bg=True)
                 plt.savefig(date_stamp,dpi=600)
 
-
-# In[8]:
-
-
 def atlas_views(input_atlas, views):
     if input_atlas == 'pauli':
         pauli_atlas(views)
@@ -154,10 +130,6 @@ def atlas_views(input_atlas, views):
         print('generating choi 2012 atlas overlay')
     else:
         print('no atlas was chosen and no atlas images will be generated')
-
-
-# In[7]:
-
 
 def brain_views(input_views):
     if str(input_views) == ('x'):
@@ -185,18 +157,10 @@ def brain_views(input_views):
         print('please input brain view display as x for saggital, y for coronal or z for axial')
     return views
 
-
-# In[ ]:
-
-
 def inputs_please():
     input_views = sys.argv[1]
     input_atlas = sys.argv[2]
     return input_views, input_atlas
-
-
-# In[ ]:
-
 
 def main():
     input_views, input_atlas = inputs_please()
@@ -207,16 +171,3 @@ def main():
 if __name__ == "__main__":
     # execute only if run as a script
     main()
-
-
-# In[11]:
-
-
-'yz' == 'xyz'
-
-
-# In[ ]:
-
-
-
-
