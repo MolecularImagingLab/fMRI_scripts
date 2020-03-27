@@ -27,36 +27,36 @@
         I. Select whole participant folder and press "Build images" then place in /home/rami/Downloads
     2. Open terminal and type:
         I. ./avl_move.sh [AVL-###]
-            a) This unpacks the DICOM files, converts them into NiFTY files and then transfers them into the appropriate folders in the BIC cloud, along with .PAR, .CSV and .acq/.txt files
+            a) This unpacks the DICOM files, converts them into NiFTY files and then transfers them \ into the appropriate folders in the BIC cloud, along with .PAR, .CSV and .acq/.txt files
 
 ## Process the fMRI data (first-level analysis only)
     1. Open terminal and type:
         I. EmoSally
             a) This will bring you to the scripts folder
         II. ./mkall.sh
-            a) This will complete first-level analysis per subject using the following scripts: parbytime.py, mk_recon.sh, pre_proc.sh, mk1stlev.sh
+            a) This will complete first-level analysis per subject using the following scripts: \ parbytime.py, mk_recon.sh, pre_proc.sh, mk1stlev.sh
 
 ## Use region-of-interest approach to see changes in fMRI activation
 	1. Open terminal and type:
 		I. EmoSally
 		    a) This will bring you to the scripts folder
 		II. ./ROI_byrun.py
-		    a) This will create a .CSV file containing % change fMRI activation in the following brain regions: Amygdala, Caudate, Hippocampus, Pallidum, Putamen, Thalamus and Nucleus Accumbens. Please note this script uses cespct.nii.gz files which have not undergone statistical corrections
+		    a) This will create a .CSV file containing % change fMRI activation in the following brain regions: \ Amygdala, Caudate, Hippocampus, Pallidum, Putamen, Thalamus and Nucleus Accumbens. \ Please note this script uses cespct.nii.gz files which have not undergone statistical corrections
 
 ## Process the group fMRI data (second-level analysis)
 	1. Open terminal and type:
 		I. EmoSally
 		    a) This will bring you to the scripts folder
 		II. ./GLM.sh
-		    a) This will complete second-level (general linear model) analysis by concatening subject data
+		    a) This will complete second-level (general linear model) analysis \ by concatening subject data
 		III. ./GLM_byrun.sh
-		    a) This will complete second-level analysis, as in 1.II.A, however will separate data by runs of the fMRI task
+		    a) This will complete second-level analysis, as in 1.II.A, \ however will separate data by runs of the fMRI task
 
 ## Use python imaging scripts to visualize statistical changes in fMRI activation 
 	1. Open terminal and type:
 		I. EmoSally
 		    a) This will bring you to the scripts folder
 		II. ./plot_ctx_by_run
-		    a) This will visualize cortical sig.nii.gz (GLM-analyzed) files generated in second-level analysis using PySurfer
+		    a) This will visualize cortical sig.nii.gz (GLM-analyzed) files \ generated in second-level analysis using PySurfer
 		III. ./plot_subctx_by_run
-		    a) This will visualize subcortical sig.nii.gz (GLM-analyzed) files generated in second-level analysis using Nilearn
+		    a) This will visualize subcortical sig.nii.gz (GLM-analyzed) files \ generated in second-level analysis using Nilearn
