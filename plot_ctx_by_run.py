@@ -27,7 +27,7 @@ def plot_ctx():
     print('Making images for:')
     statfile.sort()
     print(statfile)
-# Create the image using the plot_stat_map function
+# Create the image using pysurfer with backend function initialized
     for h in hemispheres:
         for f in statfile:
             sig = os.path.join(path,f)
