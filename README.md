@@ -41,7 +41,7 @@
 		I. EmoSally
 		    a) This will bring you to the scripts folder
 		II. ./ROI_byrun.py
-		    a) This will create a .CSV file containing % change fMRI activation in the following brain regions: Amygdala, Caudate, Hippocampus, Pallidum, Putamen, Thalamus and Nucleus Accumbens. Please note this script 
+		    a) This will create a .CSV file containing % change fMRI activation in the following brain regions: Amygdala, Caudate, Hippocampus, Pallidum, Putamen, Thalamus and Nucleus Accumbens. Please note this script uses cespct.nii.gz files which have not undergone statistical corrections
 
 ## Process the group fMRI data (second-level analysis)
 	1. Open terminal and type:
