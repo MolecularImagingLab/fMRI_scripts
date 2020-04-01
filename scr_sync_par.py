@@ -60,7 +60,7 @@ def par_mod(input_par, output_par, start, stop, start2, end2, start3, end3, star
     run1 = list(synced_onset[0:69]) 
     run2 = list(synced_onset[69:138] + fill1 + 487.1)
     run3 = list(synced_onset[138:207] + fill1 + fill2 + 974.2)
-    run4 = list(synced_onset[207:276] + fill1 + fill2 + fill3 + 1461)
+    run4 = list(synced_onset[207:276] + fill1 + fill2 + fill3 + 1461.3)
     allruns = run1 + run2 + run3 + run4
 # Replace old Trial Onsets with new Trial Onsets and save new par file
     par['Trial Onset'] = allruns
