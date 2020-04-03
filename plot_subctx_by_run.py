@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 #! /home/lauri/anaconda3/bin/python
 # Load libraries
 import os, sys, glob, re
@@ -16,7 +15,7 @@ from matplotlib import cm
 
 def pauli_atlas(views):
 # Creates subcortical parcellation maps based on Pauli 2018
-# Definiition of datestamp as the current date 
+# Definition of datestamp as the current date 
     date = pd.to_datetime('today').strftime("%d_%m_%Y_")
 # Upload the atlas of choice, for other atlases see documentation 8.2.11: Visualizing 4D probabilistic atlas maps
     subcortex = datasets.fetch_atlas_pauli_2017()
@@ -39,6 +38,28 @@ def pauli_atlas(views):
                 cut_coords=(-32,-28,-24,-20,-16,-12,-8)
                 plotting.plot_prob_atlas(atlas, cut_coords=cut_coords, view_type='continuous', display_mode=v,black_bg=True, colorbar = True)
                 plt.savefig(date_stamp,dpi=600)
+
+def yeo2015_atlas(views):
+# Creates task-based parcellation maps based on Yeo 2015
+# Definition of datestamp as the current date 
+    date = pd.to_datetime('today').strftime("%d_%m_%Y_")
+# Upload the atlas of choice. The Yeo 2015 atlas is not included in nilearn datasets and must be uploaded manually
+    task_parc = image.load_img('/usr/local/freesurfer/average/Yeo_Brainmap_MNI152/Yeo_12Comp_PrActGivenComp_FSL_MNI152_2mm.nii.gz')
+# Create the image using the plot_prob_atlas function
+    for v in views:
+        date_stamp = os.path.join('/home/lauri/Documents/temp/' + date + views[v] + '_yeo2015.jpeg')
+        if v== 'y':
+            cut_coords=(-18,-8,-2,0,6,12,18)
+            choi_parc = plotting.plot_prob_atlas(task_parc, cut_coords=cut_coords, colorbar = True, vmin = 1, vmax = 12, cmap = plt.cm.get_cmap('tab20b',12), view_type='filled_contours', display_mode=v,black_bg=True)
+            plt.savefig(date_stamp,dpi=600)
+        if v== 'z':
+            cut_coords=(-12,-10,-6,-2,8,18,22)
+            choi_parc = plotting.plot_prob_atlas(task_parc, cut_coords=cut_coords, colorbar = True, cmap = plt.cm.get_cmap('tab20b',12), view_type='filled_contours', display_mode=v,black_bg=True)
+            plt.savefig(date_stamp,dpi=600)
+        if v== 'x':
+            cut_coords=(-32,-28,-24,-20,-16,-12,-8)
+            choi_parc = plotting.plot_prob_atlas(task_parc, cut_coords=cut_coords, colorbar = True, cmap = plt.cm.get_cmap('tab20b',12), view_type='filled_contours', display_mode=v,black_bg=True)
+            plt.savefig(date_stamp,dpi=600)
 
 def choi_cmaps():
 # Creating custom colour palette based on Choi 2012
@@ -68,7 +89,7 @@ def choi_cmaps():
 
 def choi_atlas(views):
 # Creates subcortical parcellation maps based on Choi 2012
-# Definiition of datestamp as the current date 
+# Definition of datestamp as the current date 
     date = pd.to_datetime('today').strftime("%d_%m_%Y_")
 # Upload the atlas of choice. The Choi 2012 atlas is not included in nilearn datasets and must be uploaded manually
     striatal_parc = image.load_img('/usr/local/freesurfer/average/Choi_JNeurophysiol12_MNI152/Choi2012_7Networks_MNI152_FreeSurferConformed1mm_TightMask.nii.gz')
@@ -121,40 +142,35 @@ def stat_maps(views):
                 plt.savefig(date_stamp,dpi=600)
 
 def atlas_views(input_atlas, views):
-    if input_atlas == 'pauli':
+    if input_atlas == 'pauli2018':
         pauli_atlas(views)
         print('generating pauli 2018 atlas overlay')
-    if input_atlas == 'choi':
+    elif input_atlas == 'yeo2015':
+        yeo2015_atlas(views)
+        print('generating yeo 2015 atlas overlay')    
+    elif input_atlas == 'choi2012':
         choi_cmaps()
         choi_atlas(views)
         print('generating choi 2012 atlas overlay')
     else:
         print('no atlas was chosen and no atlas images will be generated')
+        print('atlas options: pauli2018, yeo2015, choi2012')
 
 def brain_views(input_views):
     if str(input_views) == ('x'):
         views = {'x':'saggital'}
         print('generating brain images in saggital view only')
-    if str(input_views) == ('y'):
+    elif str(input_views) == ('y'):
         views = {'y':'coronal'}
         print('generating brain images in coronal view only')
-    if str(input_views) == ('z'):
+    elif str(input_views) == ('z'):
         views = {'z':'axial'}
         print('generating brain images in axial view only')
-    if str(input_views) == ('xy') or ('yx'):
-        views = {'x':'saggital','y':'coronal'}
-        print('generating brain images in saggital and coronal views')
-    if str(input_views) == ('yz') or ('zy'):
-        views = {'y':'coronal','z':'axial'}
-        print('generating brain images in coronal and axial views')
-    if str(input_views) == ('xz') or ('zx'):
-        views = {'x':'saggital','z':'axial'}
-        print('generating brain images in saggital and axial views')
-    if str(input_views) == ('xyz') or ('xzy') or ('zyx') or ('zxy') or ('yzx') or ('yxz'):
+    elif str(input_views) == ('all'):
         views = {'x':'saggital','y':'coronal','z':'axial'}
         print('generating brain images in all slice views')
     else:
-        print('please input brain view display as x for saggital, y for coronal or z for axial')
+        print('please input brain view display as x for saggital, y for coronal, z for axial or all for all')
     return views
 
 def inputs_please():
@@ -171,3 +187,4 @@ def main():
 if __name__ == "__main__":
     # execute only if run as a script
     main()
+
