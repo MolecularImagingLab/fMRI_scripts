@@ -1,21 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# In[1]:
-
-
 #! /home/lauri/anaconda3/bin/python
-
 #load libraries
 import os, sys 
 import pandas as pd
 import numpy as np
 from nilearn import plotting
 import matplotlib.pyplot as plt
-
-
-# In[2]:
-
 
 def readin():
 # First argument is scr .txt file input, second argument is scr .txt file output
@@ -25,10 +16,6 @@ def readin():
     input_par = sys.argv[3]
     output_par = sys.argv[4]
     return input_scr, output_scr, input_par, output_par
-
-
-# In[1]:
-
 
 def scr_mod(input_scr, output_scr):
 #Reads in scr file and adds headers
@@ -100,10 +87,6 @@ def scr_mod(input_scr, output_scr):
     merged.to_csv(output_scr)
     return start1, end1, start2, end2, start3, end3, start4, end4
 
-
-# In[4]:
-
-
 def par_mod(input_par, output_par, start1, end1, start2, end2, start3, end3, start4, end4):
 # Must execute par_concat.py to successfully run this function
 # Reads in .par file
@@ -124,10 +107,6 @@ def par_mod(input_par, output_par, start1, end1, start2, end2, start3, end3, sta
     par['Trial Onset'] = allruns
     par.to_csv(output_par, index=False, header = False, sep=' ')
 
-
-# In[5]:
-
-
 def main():
     input_scr, output_scr, input_par, output_par = readin()
     start1, end1, start2, end2, start3, end3, start4, end4 = scr_mod(input_scr, output_scr)
@@ -136,4 +115,3 @@ def main():
 if __name__ == "__main__":
     # execute only if run as a script
     main()
-
