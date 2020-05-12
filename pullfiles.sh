@@ -9,7 +9,7 @@ if [[ -z $1 ]]; then
 else
 	echo "Pulling files from subject $1"
 # Transfers event-related fMRI paradigm (.PAR) files
-	scp -r /media/rami/My\ Passport//PAR_FILES/$1 /home/rami/Documents/PhD_Work/AVL/PAR_FILES
+	scp -r /media/rami/My\ Passport/PAR_FILES/$1 /home/rami/Documents/PhD_Work/AVL/PAR_FILES
 	echo "paradigm files successfully transferred"
 # Transfers Go/No-Go (.CSV) result files
 	scp -r /media/rami/My\ Passport/GONOGO/$1 /home/rami/Documents/PhD_Work/AVL/GONOGO
