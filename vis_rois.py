@@ -1,11 +1,5 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
 #! /home/lauri/anaconda3/bin/python
-
 #load libraries
 import os, sys 
 import pandas as pd
@@ -15,10 +9,6 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import math
 import seaborn as sns
-
-
-# In[108]:
-
 
 # Define file path
 datapath = '/media/lauri/My Passport/My_Computer/Documents/sync_me/EmoSal/reports/19_05_2020_/19_05_2020_tziortzi2014_analysis_byrun.csv'
@@ -52,10 +42,6 @@ frames = [status, motor_1, motor_2, motor_3, motor_4]
 motor = pd.concat(frames, axis=1)
 motor.columns = ['Status','Run 1', 'Run 2', 'Run 3', "Run 4"]
 
-
-# In[114]:
-
-
 # Plot Results (by run)
 networks = [limbic, executive, motor]
 networks_names = ['Limbic','Executive','Motor']
@@ -69,10 +55,6 @@ for n,l in zip(networks,networks_names):
     alldata.savefig(os.path.join('/home/lauri/Documents/temp/',l+'fmri_contrast_byrun.jpg'), dpi=300)
     plt.clf()
 
-
-# In[115]:
-
-
 # Plot Results (all 4 runs together)
 networks = [limbic, executive, motor]
 networks_names = ['Limbic','Executive','Motor']
@@ -85,4 +67,3 @@ for n,l in zip(networks,networks_names):
     plt.ylabel('% Change (fMRI activity)')
     alldata.savefig(os.path.join('/home/lauri/Documents/temp/',l+'fmri_contrast_allruns.jpg'), dpi=300)
     plt.clf()
-
