@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[11]:
-
 
 def main():
     #load libraries
@@ -26,16 +22,7 @@ def main():
     args = parser.parse_args()
     #print parsed arguments
     print( "filename {} title {} class1 {} levels1 {} class2 {} levels2 {} variable1 {} variable2 {} subjectnum {}".format(
-            args.filename,
-            args.title,
-            args.class1,
-            args.levels1,
-            args.class2,
-            args.levels2,
-            args.variable1,
-            args.variable2,
-            args.subjectnum,
-            ))
+            args.filename, args.title, args.class1, args.levels1, args.class2, args.levels2, args.variable1, args.variable2, args.subjectnum,))
     
     #writes csv file
     #open file
@@ -45,35 +32,42 @@ def main():
         writer.writerow(["GroupDescriptorFile","1"])
         #second row
         writer.writerow(["Title", args.title])
-        #Class 1 rows
-        levels1 = (args.levels1).split(",")
-        if len(levels1) == 1:
-            writer.writerow(["Class", levels1])
+        #Class rows
+        if args.levels2 != "none":
+            levels1 = (args.levels1).split(",")
+            levels2 = (args.levels2).split(",")
+            writer.writerow(["Class",str(levels1[0])+str(levels2[0])])
+            writer.writerow(["Class",str(levels1[0])+str(levels2[1])])
+            writer.writerow(["Class",str(levels1[1])+str(levels2[0])])
+            writer.writerow(["Class",str(levels1[1])+str(levels2[1])])
         else:
+            levels1 = (args.levels1).split(",")
             for factor in levels1:
                 writer.writerow(["Class", factor])
-        #Class 2 rows
-        if args.levels2 != "none":
-            levels2 = (args.levels2).split(",")
-            for factor in levels2:
-                writer.writerow(["Class", factor])
+        # Variables row
+        if args.variable1 != "none":
+            writer.writerow(["Variables", args.variable1])
+        elif args.variable2 != "none":
+            writer.writerow(["Variables", args.variable1, args.variable2])
         else:
             pass
-        writer.writerow(["Variables", args.variable1, args.variable2])
         #Subjects data
+        inputs=[[args.class1],[args.class2],[args.variable1],[args.variable2]]
         for subject in range(1,(args.subjectnum+1)):
             name = os.path.join("subject"+str(subject))
-            if args.levels2 != "none": 
-                input1= input(f"Input data for {name} in {args.class1}:")
-                input2= input(f"Input data for {name} in {args.class2}:")
-                input3= input(f"Input data for {name} in {args.variable1}:")
-                input4= input(f"Input data for {name} in {args.variable2}:")
-                writer.writerow(["Input", name, input1, input2, input3, input4])
+            gather = ["Input", name]
+            for i in inputs:  
+                if i != ["none"]:
+                    datum = input(f"Input data for {name} in {i}:")
+                    gather.append(datum)
+            if args.class2 != "none":
+                try:
+                    writer.writerow(["Input", name, str(gather[2] + gather[3]), str(gather[4] + ""), str(gather[5] + "")])
+                except:
+                    writer.writerow(["Input", name, str(gather[2] + gather[3]), str(gather[4] + "")])
             else:
-                input1= input(f"Input data for {name} in {args.class1}:")
-                input3= input(f"Input data for {name} in {args.variable1}:")
-                input4= input(f"Input data for {name} in {args.variable2}:")
-                writer.writerow(["Input", name, input1, input3, input4])
+                writer.writerow(gather)
+        #Notification                         
         PWD = str(os.getcwd())
         print(f"FSGD file sucessfully saved in {PWD}")
 if __name__ == "__main__":
