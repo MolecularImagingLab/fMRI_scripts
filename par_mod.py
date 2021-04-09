@@ -58,7 +58,7 @@ def create_int_slope(df, event1, event2):
             else:
                 # set up the first row
                 first_row = row
-                first_row.type = 0
+                first_row.type = 5
                 new_df = new_df.append(pd.Series(first_row))
 
         elif row.type == event2:
