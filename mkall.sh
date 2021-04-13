@@ -1,8 +1,10 @@
 #!/bin/bash
-export PATH=$PATH:$PWD:/group/tuominen/EmoSal/scripts/
+export SUBJECTS_DIR=/group/tuominen/EmoSal_ParMod/SUBJECTS_DIR
 
-subj=$1
-parbytime.py $subj
-mk_recon.sh $subj
-pre_proc.sh $subj
-mk1stlev.sh $subj
+subjects=$( cat subjectlist.txt )
+for i in ${subjects[@]}; do
+  ./mk_recon.sh $i
+# preproc-sess requires python 2.X
+  ./pre_proc.sh $i
+  ./mk1stlev.sh $i
+done
