@@ -6,4 +6,3 @@ for s in ${list[@]}; do
 	isxconcat-sess -sf ../scripts/sessidlist -analysis fc.$s -all-contrasts -percent -o ../group -d ../subjects
 
 done
-

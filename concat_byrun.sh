@@ -5,26 +5,26 @@
 # first create sessidlist.txt which is a list of all subjects
 # type sessidlist after the command to feed list of subjects into the loop
 sessidlist=$1
-# in this case there are four separate runs of a fear-conditioning task 
+# in this case there are four separate runs of a fear-conditioning task
 runs='pr001 pr002 pr003 pr004'
 # in this case there are four separate contrasts in a fear-conditioning paradigm
-contrast='csp csm csp_v_csm csps'
+contrast='csp_slope csp_offset csm_slope csm_offset csp_v_csm_slope csp_v_csm_offset'
 # sets the subject space
 subjects=$( cat $sessidlist )
 echo $subjects
 # sets the brain space
 space='fc.lh fc.rh fc.mni305'
 # identifies input path for cespct.nii.gz and cesvarpct.nii.gz
-path2data=/group/tuominen/EmoSal/subjects/
+path2data=/group/tuominen/EmoSal_ParMod/subjects/
 # identifies output path for concatenated files
-output=/group/tuominen/EmoSal/group/
+output=/group/tuominen/EmoSal_ParMod/group/
 # for all subjects specified in sessidlist.txt, concatenates cespct and cesvarpct files
 for s in ${space[@]}; do
-	
+
 	#mkdir ${output}/${s}
 
-	for c in ${contrast[@]}; do 
-		
+	for c in ${contrast[@]}; do
+
 		#mkdir ${output}/${s}/${c}
 
 	for r in ${runs[@]}; do
@@ -36,19 +36,19 @@ for s in ${space[@]}; do
 
 			cmd='mri_concat'
 			for subj in ${subjects[@]}; do
-					cmd+=" --i $path2data/${subj}/$pces"			
+					cmd+=" --i $path2data/${subj}/$pces"
 			done
-			
+
 			cmd+=" --o ${output}/${s}/${c}/${r}/cespct.nii.gz"
 			$cmd
 			cmd='mri_concat'
-			
+
 			for subj in ${subjects[@]}; do
 					cmd+=" --i $path2data/${subj}/$pcesvar"
 			done
-			
+
 			cmd+=" --o ${output}/${s}/${c}/${r}/cesvarpct.nii.gz"
 			$cmd
-		done 
-	done 
-done 
+		done
+	done
+done
